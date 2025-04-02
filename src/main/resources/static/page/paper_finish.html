@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Come Sostituire un Rotolo di Carta Esaurito sul POS</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --success-color: #2ecc71;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--primary-color);
+            background-color: var(--light-color);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--secondary-color);
+            font-style: italic;
+        }
+
+        .steps-container {
+            counter-reset: steps;
+        }
+
+        .step {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            position: relative;
+            counter-increment: steps;
+        }
+
+        .step::before {
+            content: counter(steps);
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .step h3 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            margin-bottom: 15px;
+        }
+
+        .step-image {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 15px auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .note {
+            background-color: #ffffdd;
+            border-left: 4px solid #ffcc00;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .success-message {
+            background-color: var(--success-color);
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+            display: none;
+        }
+
+        .btn-check {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+            margin: 20px 0;
+        }
+
+        .btn-check:hover {
+            background-color: var(--primary-color);
+        }
+
+        .troubleshooting {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .troubleshooting h2 {
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .troubleshooting ul {
+            list-style-type: none;
+        }
+
+        .troubleshooting li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .troubleshooting li::before {
+            content: "!";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .link-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .link-button:hover {
+            background-color: #c0392b;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .step {
+                padding: 15px;
+            }
+
+            .step::before {
+                width: 30px;
+                height: 30px;
+                font-size: 1em;
+                top: -10px;
+                left: -10px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Come Sostituire un Rotolo di Carta Esaurito sul POS</h1>
+        <p class="subtitle">Guida passo-passo per una sostituzione rapida e senza problemi</p>
+    </header>
+
+    <div class="steps-container">
+        <div class="step">
+            <h3>Identifica la Necessità di Sostituire il Rotolo</h3>
+            <p>Il POS segnala che la carta è esaurita in uno dei seguenti modi:</p>
+            <ul>
+                <li>Una striscia colorata appare sul bordo della carta stampata</li>
+                <li>Il display mostra un messaggio "Carta esaurita" o simile</li>
+                <li>La stampante non produce più scontrini</li>
+            </ul>
+            <img class="step-image" src="/static/content/cash-register.jpg" alt="Indicatore carta esaurita sul POS">
+        </div>
+
+        <div class="step">
+            <h3>Preparazione del Nuovo Rotolo</h3>
+            <p>Prima di aprire il POS, prepara il nuovo rotolo di carta:</p>
+            <ul>
+                <li>Rimuovi l'involucro di plastica dal nuovo rotolo</li>
+                <li>Assicurati che la parte iniziale del rotolo sia dritta (se necessario, taglia l'estremità con le forbici)</li>
+                <li>Verifica che il rotolo sia del tipo corretto per il tuo modello di POS</li>
+            </ul>
+            <img class="step-image" src="/static/content/printer.jpg" alt="Preparazione nuovo rotolo">
+        </div>
+
+        <div class="step">
+            <h3>Apertura del Vano Carta</h3>
+            <p>Apri il coperchio del vano carta del POS:</p>
+            <ul>
+                <li>Localizza la leva o il pulsante di rilascio (solitamente sulla parte superiore o laterale)</li>
+                <li>Premi delicatamente la leva o il pulsante</li>
+                <li>Il coperchio dovrebbe aprirsi automaticamente o potrà essere sollevato manualmente</li>
+            </ul>
+            <img class="step-image" src="/static/content/tax_bill_papers.jpg" alt="Apertura vano carta POS">
+            <div class="note">
+                <strong>Nota:</strong> Non forzare mai l'apertura del coperchio. Se non si apre facilmente, controlla il manuale del tuo specifico modello di POS.
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Rimozione del Rotolo Esaurito</h3>
+            <p>Una volta aperto il vano:</p>
+            <ul>
+                <li>Rimuovi il rotolo di carta esaurito o il tubo di cartone rimanente</li>
+                <li>Controlla che non ci siano residui di carta all'interno</li>
+                <li>Assicurati che la testina di stampa sia pulita (non toccarla direttamente con le dita)</li>
+            </ul>
+            <img class="step-image" src="/static/content/pos-machine.jpg" alt="Rimozione rotolo esaurito">
+        </div>
+
+        <div class="step">
+            <h3>Inserimento del Nuovo Rotolo</h3>
+            <p>Posiziona il nuovo rotolo nel vano:</p>
+            <ul>
+                <li>Inserisci il rotolo nella direzione corretta (la carta deve svolgersi dal basso verso l'alto)</li>
+                <li>Lascia un piccolo margine di carta che fuoriesca dal vano (circa 1-2 cm)</li>
+                <li>Assicurati che il rotolo sia ben posizionato e possa ruotare liberamente</li>
+            </ul>
+            <img class="step-image" src="/static/content/ROTOLI-IN-CARTA-TERMICA.jpg" alt="Inserimento nuovo rotolo">
+            <div class="note">
+                <strong>Importante:</strong> La carta termica ha un lato termosensibile che deve essere posizionato verso la testina di stampa. Solitamente, il lato esterno del rotolo è quello corretto.
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Chiusura del Vano Carta</h3>
+            <p>Completa l'installazione:</p>
+            <ul>
+                <li>Chiudi il coperchio del vano carta finché non senti un "click"</li>
+                <li>Assicurati che il bordo della carta fuoriesca correttamente dalla fessura</li>
+                <li>Premi fermamente entrambi i lati del coperchio per garantire una chiusura completa</li>
+            </ul>
+            <img class="step-image" src="/static/content/Scontrino-Pos-perche-non-e-fiscale.jpg" alt="Chiusura vano carta POS">
+        </div>
+
+        <div class="step">
+            <h3>Verifica del Funzionamento</h3>
+            <p>Testa il POS per assicurarti che tutto funzioni correttamente:</p>
+            <ul>
+                <li>Il POS potrebbe stampare automaticamente un piccolo scontrino di test</li>
+                <li>Se non lo fa, prova a stampare uno scontrino di prova (solitamente dal menu di configurazione)</li>
+                <li>Verifica che la stampa sia chiara e completa</li>
+            </ul>
+            <img class="step-image" src="/static/content/scontrini-elettronici.jpg" alt="Test stampa POS">
+            <button class="btn-check" id="checkComplete">Ho completato tutti i passaggi</button>
+            <div class="success-message" id="successMessage">
+                <p>Ottimo lavoro! Hai sostituito con successo il rotolo di carta del POS.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="troubleshooting">
+        <h2>Risoluzione Problemi Comuni</h2>
+        <ul>
+            <li><strong>La carta esce ma non stampa:</strong> Il rotolo potrebbe essere inserito al contrario. Apri il vano e gira il rotolo.</li>
+            <li><strong>La carta si inceppa durante la stampa:</strong> Verifica che il rotolo possa ruotare liberamente e che non ci siano ostacoli nel percorso della carta.</li>
+            <li><strong>Il coperchio non si chiude completamente:</strong> Controlla che il rotolo sia posizionato correttamente nel vano e che non sia troppo grande per il modello di POS.</li>
+            <li><strong>La stampante continua a indicare "Carta esaurita":</strong> Verifica che i sensori di carta siano puliti e che il rotolo sia posizionato correttamente.</li>
+        </ul>
+
+        <a href="/static/page/paper_jam.html" class="link-button">Problemi con carta inceppata? Vai alla guida specifica</a>
+    </div>
+
+    <footer>
+        <p>Per ulteriore assistenza, consulta il manuale del tuo dispositivo o contatta il supporto tecnico.</p>
+        <p>&copy; 2025 - Guida Manutenzione POS</p>
+    </footer>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const checkButton = document.getElementById('checkComplete');
+        const successMessage = document.getElementById('successMessage');
+
+        checkButton.addEventListener('click', function() {
+            successMessage.style.display = 'block';
+            checkButton.style.display = 'none';
+
+            // Scroll to success message
+            successMessage.scrollIntoView({ behavior: 'smooth' });
+
+            // Animation effect
+            let opacity = 0;
+            const interval = setInterval(function() {
+                opacity += 0.1;
+                successMessage.style.opacity = opacity;
+                if (opacity >= 1) clearInterval(interval);
+            }, 50);
+        });
+
+        // Making steps collapsible on mobile
+        const stepHeadings = document.querySelectorAll('.step h3');
+
+        if (window.innerWidth < 600) {
+            stepHeadings.forEach(heading => {
+                const step = heading.parentElement;
+                const content = step.innerHTML;
+                const title = heading.textContent;
+
+                step.innerHTML = '';
+                step.appendChild(heading);
+
+                const contentDiv = document.createElement('div');
+                contentDiv.classList.add('step-content');
+                contentDiv.style.display = 'none';
+                contentDiv.innerHTML = content.replace(title, '');
+                step.appendChild(contentDiv);
+
+                heading.style.cursor = 'pointer';
+                heading.addEventListener('click', function() {
+                    if (contentDiv.style.display === 'none') {
+                        contentDiv.style.display = 'block';
+                    } else {
+                        contentDiv.style.display = 'none';
+                    }
+                });
+            });
+        }
+    });
+</script>
+</body>
+</html>

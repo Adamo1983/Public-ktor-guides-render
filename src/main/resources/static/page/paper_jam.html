@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Come Sistemare un POS con il Rotolo di Carta Inceppato</title>
+  <style>
+    :root {
+        --primary-color: #2c3e50;
+        --secondary-color: #3498db;
+        --accent-color: #e74c3c;
+        --light-color: #ecf0f1;
+        --dark-color: #34495e;
+        --warning-color: #f39c12;
+        --success-color: #2ecc71;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: var(--primary-color);
+        background-color: var(--light-color);
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #eee;
+    }
+
+    h1 {
+        color: var(--primary-color);
+        margin-bottom: 10px;
+    }
+
+    .subtitle {
+        color: var(--secondary-color);
+        font-style: italic;
+    }
+
+    .alert-box {
+        background-color: #fff3cd;
+        border-left: 5px solid var(--warning-color);
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 0 5px 5px 0;
+    }
+
+    .alert-title {
+        color: var(--warning-color);
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .alert-title::before {
+        content: "!";
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background-color: var(--warning-color);
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        margin-right: 10px;
+        font-weight: bold;
+    }
+
+    .tabs {
+        margin: 30px 0;
+    }
+
+    .tab-buttons {
+        display: flex;
+        border-bottom: 2px solid var(--secondary-color);
+    }
+
+    .tab-button {
+        padding: 10px 20px;
+        background-color: #f1f1f1;
+        border: none;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background-color 0.3s;
+    }
+
+    .tab-button.active {
+        background-color: var(--secondary-color);
+        color: white;
+    }
+
+    .tab-content {
+        display: none;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 0 0 5px 5px;
+    }
+
+    .tab-content.active {
+        display: block;
+    }
+
+    .step {
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .step h3 {
+        color: var(--secondary-color);
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .step h3::before {
+        content: "";
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background-color: var(--secondary-color);
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .step-image {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 15px auto;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .warning {
+        background-color: #ffeaeb;
+        border-left: 4px solid var(--accent-color);
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 0 5px 5px 0;
+    }
+
+    .checklist {
+        margin: 20px 0;
+    }
+
+    .checklist-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .checklist-item input[type="checkbox"] {
+        margin-right: 10px;
+    }
+
+    .success-panel {
+        background-color: var(--success-color);
+        color: white;
+        padding: 20px;
+        border-radius: 5px;
+        margin-top: 30px;
+        text-align: center;
+        display: none;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        background-color: var(--secondary-color);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+        background-color: var(--primary-color);
+    }
+
+    .btn-primary {
+        background-color: var(--secondary-color);
+    }
+
+    .btn-warning {
+        background-color: var(--warning-color);
+    }
+
+    .accordion {
+        margin: 30px 0;
+    }
+
+    .accordion-item {
+        margin-bottom: 10px;
+    }
+
+    .accordion-title {
+        background-color: #f1f1f1;
+        padding: 15px;
+        cursor: pointer;
+        border-radius: 5px;
+        position: relative;
+        font-weight: bold;
+    }
+
+    .accordion-title::after {
+        content: "+";
+        position: absolute;
+        right: 15px;
+        transition: transform 0.3s;
+    }
+
+    .accordion-title.active::after {
+        content: "-";
+    }
+
+    .accordion-content {
+        padding: 15px;
+        background-color: white;
+        border-radius: 0 0 5px 5px;
+        display: none;
+    }
+
+    .link-button {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 10px 20px;
+        background-color: var(--secondary-color);
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .link-button:hover {
+        background-color: var(--primary-color);
+    }
+
+    footer {
+        text-align: center;
+        margin-top: 30px;
+        color: #666;
+        font-size: 0.9em;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            padding: 10px;
+        }
+
+        .container {
+            padding: 15px;
+        }
+
+        .tab-buttons {
+            flex-direction: column;
+        }
+
+        .tab-button {
+            width: 100%;
+            text-align: left;
+        }
+
+        .button-container {
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn {
+            width: 100%;
+        }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Come Sistemare un POS con il Rotolo di Carta Inceppato</h1>
+    <p class="subtitle">Guida passo-passo per risolvere problemi di carta inceppata nel terminale</p>
+  </header>
+
+  <div class="alert-box">
+    <div class="alert-title">Attenzione prima di iniziare</div>
+    <p>Non tentare mai di rimuovere la carta inceppata usando oggetti metallici o appuntiti. Potresti danneggiare la testina di stampa o altri componenti sensibili del POS.</p>
+  </div>
+
+  <div class="tabs">
+    <div class="tab-buttons">
+      <button class="tab-button active" data-tab="tab1">Problema Lieve</button>
+      <button class="tab-button" data-tab="tab2">Problema Moderato</button>
+      <button class="tab-button" data-tab="tab3">Problema Grave</button>
+    </div>
+
+    <div id="tab1" class="tab-content active">
+      <h2>Risoluzione Rapida per Inceppamenti Lievi</h2>
+      <p>Se il rotolo di carta è solo leggermente inceppato, con carta visibile fuori dal dispositivo, segui questi passaggi:</p>
+
+      <div class="step">
+        <h3>Spegni il POS</h3>
+        <p>Per sicurezza, spegni il dispositivo prima di intervenire:</p>
+        <ul>
+          <li>Premi il pulsante di accensione/spegnimento</li>
+          <li>Se necessario, scollegalo dall'alimentazione</li>
+        </ul>
+      </div>
+
+      <div class="step">
+        <h3>Estrai Delicatamente la Carta</h3>
+        <p>Afferra la parte di carta visibile e tirala delicatamente:</p>
+        <ul>
+          <li>Tira sempre in linea retta, evitando movimenti laterali</li>
+          <li>Usa una forza costante e leggera</li>
+          <li>Se senti resistenza, non forzare</li>
+        </ul>
+        <img class="step-image" src="/static/content/sigma.jpg" alt="Rimozione delicata della carta">
+      </div>
+
+      <div class="step">
+        <h3>Riavvia il Dispositivo</h3>
+        <p>Dopo aver rimosso la carta inceppata:</p>
+        <ul>
+          <li>Riaccendi il POS</li>
+          <li>Verifica che funzioni correttamente stampando uno scontrino di prova</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="tab2" class="tab-content">
+      <h2>Procedura per Inceppamenti Moderati</h2>
+      <p>Se la carta è inceppata all'interno del vano e non è facilmente accessibile, segui questa procedura:</p>
+
+      <div class="step">
+        <h3>Spegni e Scollegare il POS</h3>
+        <p>Prima di qualsiasi intervento:</p>
+        <ul>
+          <li>Spegni completamente il dispositivo</li>
+          <li>Scollegalo dalla rete elettrica per sicurezza</li>
+        </ul>
+      </div>
+
+      <div class="step">
+        <h3>Apri il Vano Carta</h3>
+        <p>Accedi al meccanismo di stampa:</p>
+        <ul>
+          <li>Premi il pulsante o la leva di rilascio del coperchio</li>
+          <li>Apri completamente il coperchio (potrebbe essere necessario sollevarlo a un angolo specifico)</li>
+        </ul>
+        <img class="step-image" src="/static/content/riciclab.jpg" alt="Apertura vano carta">
+      </div>
+
+      <div class="step">
+        <h3>Rimuovi il Rotolo di Carta</h3>
+        <p>Togli il rotolo per avere maggiore accesso:</p>
+        <ul>
+          <li>Solleva il rotolo dal vano</li>
+          <li>Se il rotolo è bloccato da carta inceppata, lascialo per ora</li>
+        </ul>
+      </div>
+
+      <div class="step">
+        <h3>Individua e Rimuovi la Carta Inceppata</h3>
+        <p>Localizza i punti di inceppamento:</p>
+        <ul>
+          <li>Esamina il percorso della carta e individua dove si è bloccata</li>
+          <li>Rimuovi delicatamente tutti i frammenti di carta inceppata</li>
+          <li>Se necessario, usa una pinzetta di plastica (mai metallica) per raggiungere pezzi piccoli</li>
+        </ul>
+        <img class="step-image" src="/static/content/scontrino-musso.jpg" alt="Rimozione carta inceppata">
+        <div class="warning">
+          <strong>Attenzione:</strong> Non toccare la testina di stampa termica (la linea nera all'interno del meccanismo). È fragile e potrebbe danneggiarsi facilmente.
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>Pulisci il Percorso della Carta</h3>
+        <p>Assicurati che il percorso sia completamente libero:</p>
+        <ul>
+          <li>Rimuovi eventuali residui di carta o polvere</li>
+          <li>Soffia delicatamente per eliminare particelle minute</li>
+          <li>Verifica che non ci siano altri ostacoli nel meccanismo</li>
+        </ul>
+        <img class="step-image" src="/static/content/buttaaa.jpg" alt="Pulizia meccanismo POS">
+      </div>
+
+      <div class="step">
+        <h3>Reinstalla il Rotolo di Carta</h3>
+        <p>Inserisci un rotolo di carta nuovo o quello precedente se in buone condizioni:</p>
+        <ul>
+          <li>Posiziona il rotolo nella direzione corretta</li>
+          <li>Assicurati che la carta si svolga dal basso verso l'alto</li>
+          <li>Lascia che un po' di carta fuoriesca dal meccanismo</li>
+        </ul>
+      </div>
+
+      <div class="step">
+        <h3>Chiudi e Testa</h3>
+        <p>Completa la procedura:</p>
+        <ul>
+          <li>Chiudi il coperchio fino a sentire un "click" di conferma</li>
+          <li>Riaccendi il POS</li>
+          <li>Esegui una stampa di prova per verificare il corretto funzionamento</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="tab3" class="tab-content">
+      <h2>Risoluzione per Inceppamenti Gravi</h2>
+      <p>In caso di inceppamento grave con carta bloccata profondamente nel meccanismo di stampa:</p>
+
+      <div class="step">
+        <h3>Spegni e Scollegare Completamente</h3>
+        <p>Assicurati che il dispositivo sia completamente disalimentato:</p>
+        <ul>
+          <li>Spegni il POS</li>
+          <li>Scollega il cavo di alimentazione</li>
+          <li>Se presente, rimuovi anche la batteria</li>
+        </ul>
+      </div>
+
+      <div class="step">
+        <h3>Apertura Completa</h3>
+        <p>Accedi al meccanismo interno:</p>
+        <ul>
+          <li>Apri il vano carta completamente</li>
+          <li>Se possibile, rimuovi qualsiasi copertura aggiuntiva seguendo le indicazioni del manuale</li>
+          <li>Identifica tutti i punti di inceppamento</li>
+        </ul>
+        <img class="step-image" src="/static/content/pazzi-scontrini.jpg" alt="Apertura completa POS">
+        <div class="warning">
+          <strong>Importante:</strong> In alcuni modelli, l'apertura completa potrebbe invalidare la garanzia. Consulta il manuale o contatta l'assistenza se non sei sicuro.
+        </div>
+      </div>
+
+      <div class="step">
+        <h3>Rimozione Sistematica</h3>
+        <p>Procedi con metodo:</p>
+        <ul>
+          <li>Rimuovi la carta partendo dai bordi visibili</li>
+          <li>Usa una pinzetta di plastica per le parti difficili da raggiungere</li>
+          <li>Rimuovi un pezzo alla volta, evitando di strappare la carta</li>
+          <li>Se un pezzo si strappa, assicurati di rimuovere tutti i frammenti</li>
+        </ul>
+        <img class="step-image" src="/static/content/scontrino.jpg" alt="Rimozione sistematica carta">
+      </div>
+
+      <div class="step">
+        <h3>Ispezione del Rullo</h3>
+        <p>Verifica lo stato del rullo di stampa:</p>
+        <ul>
+          <li>Controlla se il rullo principale ruota liberamente</li>
+          <li>Rimuovi eventuali residui di carta avvolti attorno al rullo</li>
+          <li>Verifica che gli ingranaggi o le pulegge non siano danneggiati</li>
+        </ul>
+      </div>
+
+      <div class="step">
+        <h3>Pulizia Approfondita</h3>
+        <p>Esegui una pulizia completa:</p>
+        <ul>
+          <li>Usa aria compressa a bassa pressione per rimuovere detriti fini</li>
+          <li>Pulisci i sensori con un bastoncino di cotone leggermente inumidito con alcol isopropilico</li>
+          <li>Lascia asciugare completamente prima di riassemblare</li>
+        </ul>
+        <img class="step-image" src="/static/content/woman.jpg" alt="Pulizia approfondita POS">
+      </div>
+
+      <div class="step">
+        <h3>Riassemblaggio e Test</h3>
+        <p>Completa il lavoro:</p>
+        <ul>
+          <li>Riassembla tutte le parti nell'ordine inverso allo smontaggio</li>
+          <li>Inserisci un nuovo rotolo di carta</li>
+          <li>Chiudi tutti i coperchi verificando il corretto allineamento</li>
+          <li>Riaccendi il dispositivo e esegui un test di stampa</li>
+        </ul>
+      </div>
+
+      <div class="warning">
+        <strong>Nota importante:</strong> Se dopo questi passaggi il problema persiste, o se noti danni al meccanismo di stampa, è consigliabile contattare l'assistenza tecnica. Continuare a utilizzare un POS danneggiato potrebbe peggiorare il problema.
+      </div>
+    </div>
+  </div>
+
+  <div class="checklist">
+    <h2>Checklist di Verifica Finale</h2>
+    <p>Utilizza questa checklist per assicurarti di aver completato tutti i passaggi necessari:</p>
+
+    <div class="checklist-item">
+      <input type="checkbox" id="check1">
+      <label for="check1">Ho rimosso completamente tutta la carta inceppata</label>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" id="check2">
+      <label for="check2">Ho verificato che il percorso della carta sia completamente libero</label>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" id="check3">
+      <label for="check3">Ho installato correttamente un rotolo di carta funzionante</label>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" id="check4">
+      <label for="check4">Ho chiuso correttamente tutti i coperchi del POS</label>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" id="check5">
+      <label for="check5">Ho testato il dispositivo stampando uno scontrino di prova</label>
+    </div>
+
+    <button id="verifyBtn" class="btn btn-primary">Ho completato tutte le verifiche</button>
+
+    <div id="successPanel" class="success-panel">
+      <h3>Ottimo lavoro!</h3>
+      <p>Hai risolto con successo il problema della carta inceppata nel POS. Il dispositivo dovrebbe ora funzionare correttamente.</p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <h2>Domande Frequenti</h2>
+
+    <div class="accordion-item">
+      <div class="accordion-title">Posso usare qualunque tipo di carta per il mio POS?</div>
+      <div class="accordion-content">
+        <p>No, è fondamentale utilizzare solo rotoli di carta termica specifici per il tuo modello di POS. L'utilizzo di carta non compatibile è una delle cause più comuni di inceppamento e può danneggiare il meccanismo di stampa. Verifica sempre le specifiche del produttore.</p>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-title">Quanto spesso devo pulire il meccanismo di stampa del POS?</div>
+      <div class="accordion-content">
+        <p>È consigliabile effettuare una pulizia di base del meccanismo di stampa ogni 3-6 mesi, a seconda dell'utilizzo. In ambienti polverosi o con elevato volume di stampe, potrebbe essere necessaria una pulizia più frequente. Seguire sempre le indicazioni del produttore per le procedure di manutenzione.</p>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-title">Il POS continua a incepparsi anche dopo aver seguito tutte le procedure. Cosa devo fare?</div>
+      <div class="accordion-content">
+        <p>Inceppamenti ripetuti possono indicare un problema meccanico più serio. Le cause potrebbero essere:</p>
+        <ul>
+          <li>Testina di stampa danneggiata</li>
+          <li>Sensori malfunzionanti</li>
+          <li>Componenti meccanici usurati</li>
+          <li>Problemi elettronici</li>
+        </ul>
+        <p>In questi casi, è necessario contattare l'assistenza tecnica per una diagnosi professionale e una riparazione.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="button-container">
+    <a href="/static/page/paper_finish.html" class="btn btn-primary">Guida sostituzione rotolo</a>
+    <button id="printBtn" class="btn btn-warning">Stampa questa guida</button>
+  </div>
+
+  <footer>
+    <p>Per ulteriore assistenza, consulta il manuale del tuo dispositivo o contatta il supporto tecnico.</p>
+    <p>&copy; 2025 - Guida Manutenzione POS</p>
+  </footer>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      // Tab functionality
+      const tabButtons = document.querySelectorAll('.tab-button');
+      const tabContents = document.querySelectorAll('.tab-content');
+
+      tabButtons.forEach(button => {
+          button.addEventListener('click', function() {
+              const tabId = this.getAttribute('data-tab');
+
+              // Remove active class from all buttons and tabs
+              tabButtons.forEach(btn => btn.classList.remove('active'));
+              tabContents.forEach(content => content.classList.remove('active'));
+
+              // Add active class to current button and tab
+              this.classList.add('active');
+              document.getElementById(tabId).classList.add('active');
+          });
+      });
+
+      // Accordion functionality
+      const accordionTitles = document.querySelectorAll('.accordion-title');
+
+      accordionTitles.forEach(title => {
+          title.addEventListener('click', function() {
+              // Toggle active class on title
+              this.classList.toggle('active');
+
+              // Toggle display of content
+              const content = this.nextElementSibling;
+              if (content.style.display === 'block') {
+                  content.style.display = 'none';
+              } else {
+                  content.style.display = 'block';
+              }
+          });
+      });
+
+      // Verification button
+      const verifyBtn = document.getElementById('verifyBtn');
+      const successPanel = document.getElementById('successPanel');
+
+      verifyBtn.addEventListener('click', function() {
+          const checkboxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+          let allChecked = true;
+
+          checkboxes.forEach(checkbox => {
+              if (!checkbox.checked) {
+                  allChecked = false;
+              }
+          });
+
+          if (allChecked) {
+              successPanel.style.display = 'block';
+              successPanel.scrollIntoView({ behavior: 'smooth' });
+          } else {
+              alert('Per favore, completa tutte le verifiche prima di procedere.');
+          }
+      });
+
+      // Print button
+      const printBtn = document.getElementById('printBtn');
+
+      printBtn.addEventListener('click', function() {
+          window.print();
+      });
+
+      // Auto-select first tab on mobile
+      if (window.innerWidth < 600) {
+          tabButtons[0].click();
+      }
+  });
+</script>
+</body>
+</html>

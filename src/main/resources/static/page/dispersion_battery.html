@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dispersione della Batteria</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 16px;
+            color: #333;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #1976D2;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+        h2 {
+            color: #2196F3;
+            font-size: 20px;
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+        p {
+            margin-bottom: 16px;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .tip {
+            background-color: #E3F2FD;
+            border-left: 4px solid #2196F3;
+            padding: 12px;
+            margin: 16px 0;
+        }
+        .warning {
+            background-color: #FFECB3;
+            border-left: 4px solid #FFC107;
+            padding: 12px;
+            margin: 16px 0;
+        }
+        .chart {
+            background-color: #F5F5F5;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin: 12px 0;
+        }
+        ul {
+            padding-left: 24px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<h1>Dispersione della Batteria</h1>
+
+<div class="card">
+    <p>Questa guida spiega le cause della dispersione energetica della batteria (consumo quando il dispositivo non è in uso attivo) e come minimizzarla per ottimizzare l'autonomia del dispositivo.</p>
+    <img src="/static/content/battery-ko.png" alt="Carica batteria" style="width: 100%; margin-top: 15px; border-radius: 8px;">
+</div>
+
+<h2>Cos'è la Dispersione della Batteria</h2>
+<p>La dispersione della batteria (o battery drain) si riferisce alla situazione in cui la batteria del dispositivo si scarica più rapidamente del previsto, anche quando il dispositivo non è in uso attivo. Questo fenomeno può essere causato da diversi fattori, alcuni dei quali sono sotto il controllo dell'utente.</p>
+
+<div class="chart">
+    <h3>Tasso di Dispersione Normale</h3>
+    <table>
+        <tr>
+            <th>Condizione del Dispositivo</th>
+            <th>Tasso di Scarica (% per ora)</th>
+        </tr>
+        <tr>
+            <td>Standby (schermo spento, nessuna attività)</td>
+            <td>0.5 - 1%</td>
+        </tr>
+        <tr>
+            <td>Standby con connessioni attive (Wi-Fi, Bluetooth)</td>
+            <td>1 - 2%</td>
+        </tr>
+        <tr>
+            <td>Standby con sincronizzazione in background</td>
+            <td>2 - 3%</td>
+        </tr>
+        <tr>
+            <td>Standby notturno (8 ore)</td>
+            <td>4 - 8% totale</td>
+        </tr>
+    </table>
+</div>
+
+<div class="warning">
+    <p><strong>Attenzione:</strong> Una dispersione superiore al 3% all'ora in standby indica generalmente un problema che richiede attenzione.</p>
+</div>
+
+<h2>Cause Comuni della Dispersione</h2>
+
+<div class="card">
+    <h3>1. Processi di Sistema</h3>
+    <ul>
+        <li><strong>Aggiornamenti in background:</strong> Il sistema può scaricare e installare aggiornamenti in background</li>
+        <li><strong>Sincronizzazione dati:</strong> Sincronizzazione continua con server cloud</li>
+        <li><strong>Scansioni di sistema:</strong> Controlli periodici di sicurezza o manutenzione</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h3>2. Connettività</h3>
+    <ul>
+        <li><strong>Ricerca di segnale:</strong> In aree con segnale debole, il dispositivo aumenta la potenza per mantenere la connessione</li>
+        <li><strong>Wi-Fi attivo:</strong> Ricerca continua di reti disponibili quando non connesso</li>
+        <li><strong>Bluetooth attivo:</strong> Ricerca continua di dispositivi da accoppiare</li>
+        <li><strong>NFC attivo:</strong> Scansione costante di tag NFC nelle vicinanze</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h3>3. Applicazioni</h3>
+    <ul>
+        <li><strong>App in background:</strong> Applicazioni che continuano a funzionare anche quando non in uso</li>
+        <li><strong>Notifiche push:</strong> App che mantengono connessioni per ricevere notifiche</li>
+        <li><strong>Geolocalizzazione:</strong> App che tracciano costantemente la posizione</li>
+        <li><strong>Bug nelle app:</strong> Applicazioni con problemi che causano cicli di elaborazione inutili</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h3>4. Hardware e Ambiente</h3>
+    <ul>
+        <li><strong>Temperature estreme:</strong> Funzionamento a temperature molto alte o basse</li>
+        <li><strong>Età della batteria:</strong> Batterie vecchie perdono capacità e si scaricano più velocemente</li>
+        <li><strong>Sensori attivi:</strong> Accelerometro, giroscopio, e altri sensori in funzione costante</li>
+        <li><strong>Luminosità dello schermo:</strong> Anche quando spento, alcuni componenti restano attivi</li>
+    </ul>
+</div>
+
+<h2>Come Identificare la Causa della Dispersione</h2>
+
+<div class="card">
+    <h3>Diagnosi tramite il dispositivo</h3>
+    <ol>
+        <li>Accedere al menu "Impostazioni" del dispositivo</li>
+        <li>Selezionare "Batteria" o "Utilizzo batteria"</li>
+        <li>Verificare quali applicazioni o servizi consumano più energia</li>
+        <li>Controllare se ci sono picchi di consumo in determinati orari</li>
+    </ol>
+</div>
+
+<div class="tip">
+    <p><strong>Suggerimento:</strong> Se un'app consuma più del 5% della batteria in standby, considerate di limitarne l'attività in background o di disinstallarla se non è essenziale.</p>
+</div>
+
+<h2>Soluzioni per Ridurre la Dispersione</h2>
+
+<div class="card">
+    <h3>Ottimizzazione della Connettività</h3>
+    <ul>
+        <li>Disattivare Wi-Fi, Bluetooth e dati mobili quando non necessari</li>
+        <li>Attivare la modalità aereo durante la notte o in aree con segnale molto debole</li>
+        <li>Utilizzare connessioni Wi-Fi invece di dati mobili quando possibile</li>
+        <li>Disattivare la ricerca automatica di reti Wi-Fi</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h3>Gestione delle Applicazioni</h3>
+    <ul>
+        <li>Chiudere completamente le applicazioni non utilizzate</li>
+        <li>Limitare le autorizzazioni di background per le app non essenziali</li>
+        <li>Disattivare le notifiche push per le app meno importanti</li>
+        <li>Disinstallare applicazioni inutilizzate o che consumano molta energia</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h3>Impostazioni di Sistema</h3>
+    <ul>
+        <li>Attivare la modalità risparmio energetico</li>
+        <li>Ridurre la frequenza di sincronizzazione automatica</li>
+        <li>Disattivare animazioni ed effetti visivi non necessari</li>
+        <li>Impostare intervalli di sospensione dello schermo più brevi</li>
+        <li>Ridurre la luminosità dello schermo</li>
+    </ul>
+</div>
+
+<div class="warning">
+    <p><strong>Attenzione:</strong> Se il problema di dispersione persiste dopo aver applicato queste soluzioni, potrebbe esserci un problema hardware o un'app malfunzionante. In questo caso, è consigliabile rivolgersi all'assistenza tecnica.</p>
+</div>
+
+<h2>Monitoraggio Continuo</h2>
+
+<div class="card">
+    <p>È consigliabile monitorare regolarmente l'utilizzo della batteria per identificare precocemente eventuali problemi:</p>
+    <ul>
+        <li>Controllare settimanalmente le statistiche di utilizzo della batteria</li>
+        <li>Osservare eventuali cambiamenti dopo l'installazione di nuove app</li>
+        <li>Verificare periodicamente se ci sono aggiornamenti di sistema disponibili</li>
+        <li>Tenere traccia dell'invecchiamento della batteria (capacità massima diminuisce nel tempo)</li>
+    </ul>
+</div>
+
+<div class="tip">
+    <p><strong>Suggerimento:</strong> L'utilizzo del nostro strumento di diagnostica integrato consente di generare un report completo sullo stato della batteria e sulle possibili cause di dispersione. Accedere a "Strumenti > Diagnostica > Batteria" per eseguire l'analisi.</p>
+</div>
+
+</body>
+</html>
