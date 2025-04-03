@@ -16,5 +16,6 @@ fun Route.versionRoute(){
             HttpStatusCode.OK,
             GuideVersionResponse(version = Guide.VERSION)
         )
+
     }
 }

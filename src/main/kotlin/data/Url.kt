@@ -22,13 +22,15 @@ object Url {
     const val RELATIVE_CONTENT_BATTERY_DISPERSION_IMAGE = "/content/battery-ko.png"
     const val RELATIVE_CONTENT_BATTERY_USAGE_MAINTENANCE_IMAGE = "/content/battery-reading.png"
 
+    const val  RELATIVE_CONTENT_PAPER1_IMAGE = "/content/riciclab.jpg"
+    const val  RELATIVE_CONTENT_PAPER2_IMAGE = "/content/pazzi-scontrini.jpg"
+
     const val RELATIVE_CONTENT_BATTERY_CHARGING_PAGE = "/page/charging_battery.html"
     const val RELATIVE_CONTENT_BATTERY_DISPERSION_PAGE = "/page/dispersion_battery.html"
     const val RELATIVE_CONTENT_BATTERY_USAGE_PAGE = "/page/usage_battery.html"
 
-
-
-
+    const val RELATIVE_CONTENT_PAPER_FINISH_PAGE = "/page/paper_finish.html"
+    const val RELATIVE_CONTENT_PAPER_JAM_PAGE = "/page/paper_jam.html"
 
 
 }

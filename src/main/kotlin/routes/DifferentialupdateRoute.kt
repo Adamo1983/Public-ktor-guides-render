@@ -2,60 +2,15 @@ package it.innovactors.routes
 
 import io.ktor.http.*
 import io.ktor.server.application.*
-import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import it.innovactors.data.Guide
 import it.innovactors.data.Url
-import it.innovactors.model.request.DifferentialUpdateRequest
 import it.innovactors.model.response.DifferentialUpdateResponse
 
 
 fun Route.differentialUpdate(){
 
-//    post(Url.RELATIVE_NESTED_UPDATE_DIFF_POST){
-//
-//        try {
-//            val request: DifferentialUpdateRequest? = kotlin.runCatching { call.receiveNullable<DifferentialUpdateRequest>() }.getOrNull()
-//
-//            //richiesta nulla
-//            if(request == null){
-//                call.respond(HttpStatusCode.BadRequest)
-//                return@post
-//            }
-//            //richiesta con errata versione
-//            val clientVersion: Int = request.currentVersion
-//            if(clientVersion >= Guide.nextVersion){
-//                call.respond(HttpStatusCode.NotModified)
-//                return@post
-//            }
-//
-//
-//            val nextVersion = Guide.nextVersion
-//            val categoriesToAdd = Guide.categoriesToAdd
-//            val contentsToAdd = Guide.contentsToAdd
-//            val categoryIdsToDelete = Guide.categoryIdsToDelete
-//            val contentIdsToDelete = Guide.contentIdsToDelete
-//            val relationshipsToAdd = Guide.relationshipsToAdd
-//
-//            val response = DifferentialUpdateResponse(
-//                newVersion = nextVersion,
-//                categoriesToAdd = categoriesToAdd,
-//                contentsToAdd = contentsToAdd,
-//                categoryIdsToDelete = categoryIdsToDelete,
-//                contentIdsToDelete = contentIdsToDelete,
-//                relationshipsToAdd = relationshipsToAdd
-//            )
-//
-//            call.respond(HttpStatusCode.OK, response)
-//
-//        }catch (e: Exception) {
-//            call.respond(
-//                HttpStatusCode.InternalServerError,
-//                mapOf("error" to (e.message ?: "Invalid request"))
-//            )
-//        }
-//    }
     get(Url.RELATIVE_NESTED_UPDATE_DIFF_GET){
         try{
             val currentVersion = call.parameters["currentVersion"]?.toIntOrNull()
