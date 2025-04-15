@@ -4,6 +4,10 @@ WORKDIR /app
 COPY . .
 RUN ./gradlew shadowJar --no-daemon
 
+# Aggiungi permessi di esecuzione a gradlew
+RUN chmod +x ./gradlew
+RUN ./gradlew shadowJar --no-daemon
+
 # Stage 2: Runtime stage
 FROM openjdk:17-alpine
 WORKDIR /app

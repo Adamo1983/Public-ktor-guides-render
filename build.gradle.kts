@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.ktor)
     alias(libs.plugins.kotlin.plugin.serialization)
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 group = "it.innovactors"
@@ -29,4 +30,16 @@ dependencies {
     implementation(libs.logback.classic)
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.kotlin.test.junit)
+}
+
+tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
+    archiveBaseName.set("guide-server")
+    archiveClassifier.set("")
+    archiveVersion.set("")
+    mergeServiceFiles()
+    manifest {
+        attributes(mapOf(
+            "Main-Class" to application.mainClass.get()
+        ))
+    }
 }
