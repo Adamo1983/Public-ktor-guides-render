@@ -9,7 +9,7 @@ object Url {
     //ktor-guides-example.onrender.com
     private const val IP = "ktor-guides-example.onrender.com"
 
-    const val BASE = "http://$IP:10000"
+    const val BASE = "http://$IP"
 
     const val ROOT = "/api"
 
