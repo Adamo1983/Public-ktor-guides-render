@@ -6,10 +6,8 @@ object Url {
     //private val IP = System.getenv("BASE_IP") ?: "localhost"
 
     // x REnder
-    //ktor-guides-example.onrender.com
-    private const val IP = "ktor-guides-example.onrender.com"
 
-    const val BASE = "http://$IP"
+    const val BASE = "http://public-ktor-guides-render.onrender.com"
 
     const val ROOT = "/api"
 
