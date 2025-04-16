@@ -2,7 +2,14 @@ package it.innovactors.data
 
 object Url {
 
-    const val BASE = "http://10.200.1.114:8800"
+    //privato
+    //private val IP = System.getenv("BASE_IP") ?: "localhost"
+
+    // x REnder
+    //ktor-guides-example.onrender.com
+    private const val IP = "ktor-guides-example.onrender.com"
+
+    const val BASE = "http://$IP:10000"
 
     const val ROOT = "/api"
 
